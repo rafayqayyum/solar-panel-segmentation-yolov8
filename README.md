@@ -12,11 +12,14 @@ The dataset is available at [Multi-resolution dataset for photovoltaic panel seg
 The model is trained for 20 epochs. The training metrics are as follows:
 ![Training Metrics](results/results.png)
 
+## Examples
+![Exampe 1](results/train_batch0.jpg) 
+![Example 2](results/train_batch351.jpg)
+
 ## Inference
 `prediction.py` can be used for inference on images. Use the following command to run inference on an image:
 ```
 python prediction.py --image [Image path] --model [Model path] -c 0.5
-```
 ```
 OR 
 
