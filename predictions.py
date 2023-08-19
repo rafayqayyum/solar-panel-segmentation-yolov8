@@ -4,12 +4,16 @@ import numpy as np
 import argparse
 
 # function takes an image, predicts the bounding boxes, saves the image with bounding boxes and returns the results
-def predict(image,model):
-    results = model(image)
+def predict(image,model,conf):
+    results = model(image,conf=conf)
     boxes = results[0].boxes.xyxy.cpu().numpy()
+    if len(boxes)==0:
+        print("No object detected")
+        return
     confs = results[0].boxes.conf.cpu().numpy()
     classes = results[0].boxes.cls.cpu().numpy()
     masks = results[0].masks.masks.cpu().numpy()
+    
     
     # draw bounding boxes
     for i in range(len(boxes)):
@@ -38,10 +42,11 @@ if __name__=="__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("-i", "--image", required=True, help="path to input image")
     ap.add_argument("-m", "--model", required=True, help="path to model")
+    ap.add_argument("-c", "--conf", required=True, help="confidence threshold")
     args = vars(ap.parse_args())
     model = YOLO(args["model"])  # initialize
     image=cv2.imread(args["image"])
-    predict(image,model)
+    predict(image,model,conf=float(args["conf"]))
     
     
     
