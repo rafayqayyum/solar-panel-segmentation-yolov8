@@ -17,7 +17,6 @@ The model is trained for 20 epochs. The training metrics are as follows:
 ```
 python prediction.py --image [Image path] --model [Model path] -c 0.5
 ```
-```
 OR 
 
 ```
